@@ -1,21 +1,59 @@
 import mongoose from 'mongoose';
 
 const hospitalSchema = new mongoose.Schema({
-    hospitalName: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    contact: { type: String, required: true },
-    address: {
-        street: { type: String, required: true },
-        city: { type: String, required: true },
-        state: { type: String, required: true },
-        zipCode: { type: String, required: true },
+    name: {
+        type: String,
+        required: true,
+        trim: true
     },
-    registrationNumber: { type: String, required: true },
-    about: { type: String },
-    profilePhoto: { type: String },
-    websiteUrl: { type: String },
-    doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: "HospitalDoctor" }], // Linked list of associated doctors
+    location: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    address: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    registrationDate: {
+        type: Date,
+        default: Date.now
+    },
+    hospitalProfilePhoto: {
+        type: String,
+        default: 'https://cdn.pixabay.com/photo/2017/01/31/22/32/doctor-2027768_1280.png'
+    },
+    specializations: {
+        type: [String],
+        default: []
+    },
+    facilities: {
+        type: [String],
+        default: []
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
-export default mongoose.model("Hospital", hospitalSchema);
+const Hospital = mongoose.model('Hospital', hospitalSchema);
+
+export default Hospital;

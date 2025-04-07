@@ -9,7 +9,7 @@
     color: white;
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 0;
 }
 
 .doctors-banner::before {
@@ -71,7 +71,7 @@ h1 {
 
 .search-icon {
     position: absolute;
-    left: 16px;
+    left: 30px;
     top: 50%;
     transform: translateY(-50%);
     color: #666;

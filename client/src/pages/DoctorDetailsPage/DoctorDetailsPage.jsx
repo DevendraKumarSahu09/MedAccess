@@ -17,15 +17,19 @@ import './DoctorDetailsPage.css';
 const DoctorDetailsPage = () => {
     const [doctor, setDoctor] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
         const fetchDoctorDetails = async () => {
             try {
+                setLoading(true);
                 const response = await axios.get(`http://localhost:5000/api/users/doctors/${id}`);
                 setDoctor(response.data);
+                setError(null);
             } catch (error) {
                 console.error('Error fetching doctor details:', error);
+                setError('Failed to load doctor information. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -38,18 +42,26 @@ const DoctorDetailsPage = () => {
         return <div className="loading-state">Loading doctor information...</div>;
     }
 
-    if (!doctor) {
+    if (error || !doctor) {
         return (
             <div className="error-state">
                 <AlertCircle size={48} />
-                <p>Doctor information not found</p>
+                <p>{error || 'Doctor information not found'}</p>
             </div>
         );
     }
 
-    const imageUrl = !doctor.profilePhoto
-        ? `http://localhost:5000${doctor.profilePhoto}`
-        : 'https://www.shutterstock.com/image-photo/profile-photo-attractive-family-doc-600nw-1724693776.jpg';
+    const imageUrl = doctor.profilePhoto || doctor.profilePicture || 'https://cdn.pixabay.com/photo/2022/09/08/03/39/doctor-7439967_1280.png';
+
+    // Get hospital information from different possible structures
+    const hospitalName = doctor.affiliateHospital 
+        ? (typeof doctor.affiliateHospital === 'object' ? doctor.affiliateHospital.name : doctor.affiliateHospital)
+        : doctor.hospitalName || 'Not affiliated';
+
+    // Format clinic address if available
+    const formattedAddress = doctor.clinicAddress
+        ? `${doctor.clinicAddress.street || ''}, ${doctor.clinicAddress.city || ''}, ${doctor.clinicAddress.state || ''} ${doctor.clinicAddress.zipCode || ''}`
+        : doctor.address || 'No address available';
 
     return (
         <div className="doctor-details-page">
@@ -82,7 +94,7 @@ const DoctorDetailsPage = () => {
                             <Building className="info-icon" />
                             <div className="info-content">
                                 <h3>Hospital Affiliation</h3>
-                                <p>{doctor.affiliateHospital ? doctor.affiliateHospital.name : "Not affiliated"}</p>
+                                <p>{hospitalName}</p>
                             </div>
                         </div>
 
@@ -90,7 +102,7 @@ const DoctorDetailsPage = () => {
                             <Clock className="info-icon" />
                             <div className="info-content">
                                 <h3>Clinic Timings</h3>
-                                <p>{doctor.clinicTimings}</p>
+                                <p>{doctor.clinicTimings || doctor.visitingHours || "Not specified"}</p>
                             </div>
                         </div>
 
@@ -98,9 +110,13 @@ const DoctorDetailsPage = () => {
                             <Globe className="info-icon" />
                             <div className="info-content">
                                 <h3>Website</h3>
-                                <a href={doctor.websiteUrl} target="_blank" rel="noopener noreferrer">
-                                    {doctor.websiteUrl || "Not provided"}
-                                </a>
+                                {doctor.websiteUrl ? (
+                                    <a href={doctor.websiteUrl} target="_blank" rel="noopener noreferrer">
+                                        {doctor.websiteUrl}
+                                    </a>
+                                ) : (
+                                    <p>Not provided</p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -113,7 +129,7 @@ const DoctorDetailsPage = () => {
                             <Phone className="info-icon" />
                             <div className="info-content">
                                 <h3>Contact Number</h3>
-                                <p>{doctor.contact || "Not available"}</p>
+                                <p>{doctor.phoneNumber || doctor.contactNumber || "Not available"}</p>
                             </div>
                         </div>
 
@@ -121,11 +137,7 @@ const DoctorDetailsPage = () => {
                             <MapPin className="info-icon" />
                             <div className="info-content">
                                 <h3>Clinic Address</h3>
-                                <p>
-                                    {doctor.clinicAddress
-                                        ? `${doctor.clinicAddress.street}, ${doctor.clinicAddress.city}, ${doctor.clinicAddress.state} - ${doctor.clinicAddress.zipCode}`
-                                        : "No address available"}
-                                </p>
+                                <p>{formattedAddress}</p>
                             </div>
                         </div>
                     </div>

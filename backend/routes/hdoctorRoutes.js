@@ -33,3 +33,6 @@ router.put('/:id', authMiddleware, upload.single('profilePicture'), updateDoctor
 router.delete('/:id', authMiddleware, deleteDoctor);
 
 export default router;
+
+
+

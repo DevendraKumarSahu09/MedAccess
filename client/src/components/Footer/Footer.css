@@ -4,6 +4,7 @@
     padding: 1.5rem 2rem;
     position: relative;
     overflow: hidden;
+    margin-top: auto;
 }
 
 .footer::before {

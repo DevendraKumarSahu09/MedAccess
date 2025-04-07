@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import "./Homepage.css";
 import BlogsNews from "./BlogsNews";
 
@@ -31,24 +32,28 @@ const HomePage = () => {
 
     const columnsData = [
         {
-            image: "/Images/hospital icon.png",
+            image: "/Images/hos.jpg",
             title: "Hospitals Around You",
-            text: "This is the description for the first column.",
+            text: "Locate nearby healthcare facilities with detailed information on specialties, ratings, and emergency services. Find the best care close to home.",
+            path: "/hospitals"
         },
         {
-            image: "/Images/doctor icon.png",
+            image: "/Images/doc.jpg",
             title: "Check Best Doctors",
-            text: "This is the description for the second column.",
+            text: "Connect with verified medical specialists. View qualifications, experience, and patient reviews to choose your ideal healthcare provider.",
+            path: "/doctors"
         },
         {
-            image: "/Images/Beds icon.png",
+            image: "/Images/Beds.jpg",
             title: "Search Beds",
-            text: "This is the description for the third column.",
+            text: "Real-time availability of hospital beds across departments. Check ICU, general ward, and specialty bed status with daily updates.",
+            path: "/beds"
         },
         {
-            image: "/Images/blood-bank icon.png",
+            image: "/Images/blood.jpg",
             title: "Need Blood ?",
-            text: "This is the description for the fourth column.",
+            text: "Find blood type availability and connect with donors instantly. Emergency requests get priority handling with our rapid response system.",
+            path: "/blood-bank"
         },
     ];
 
@@ -85,15 +90,17 @@ const HomePage = () => {
                 {/* 4-Column Layout */}
                 <div className="grid-container">
                     {columnsData.map((column, index) => (
-                        <div className="grid-item" key={index}>
-                            <img
-                                src={column.image}
-                                alt={`Column ${index + 1}`}
-                                className="column-icon"
-                            />
-                            <h3>{column.title}</h3>
-                            <p>{column.text}</p>
-                        </div>
+                        <Link to={column.path} key={index} className="grid-link">
+                            <div className="grid-item">
+                                <img
+                                    src={column.image}
+                                    alt={`Column ${index + 1}`}
+                                    className="column-icon"
+                                />
+                                <h3>{column.title}</h3>
+                                <p>{column.text}</p>
+                            </div>
+                        </Link>
                     ))}
                 </div>
 
@@ -104,7 +111,9 @@ const HomePage = () => {
                         <p className="subtitle">Find doctors, beds, and blood banks easily. <br></br>Register now for exclusive benefits!<br></br>Streamline your healthcare journey with us<br></br>Register now for exclusive benefits!</p>
                     </div>
                     <div>
+                    <Link to="/signup">
                         <button className="register-button">Get Registered</button>
+                    </Link>
                     </div>
                     <img
                         src="/Images/ForDoctor.png"
@@ -122,9 +131,11 @@ const HomePage = () => {
                             <p className="subtitle2">
                                 Find out you prefered blood at and ease of one click
                             </p>
+                            <Link to='/blood-bank'>
                             <button className="check-button">
                                 Check Availability
                             </button>
+                            </Link>
                         </div>
                         <div className="bb-image-container">
                             <img
@@ -140,9 +151,11 @@ const HomePage = () => {
                             <p className="subtitle2">
                                 Checkout Availability of Beds in Hospital Rooms at various locations
                             </p>
+                            <Link to='/beds'>
                             <button className="check-button">
                                 Check
                             </button>
+                            </Link>
                         </div>
                         <div className="bb-image-container">
                             <img
@@ -159,7 +172,9 @@ const HomePage = () => {
                         <p className="subtitle 2">
                             Find out Doctors from various specializations and departments on a go. Checkout theri ratings and work, refer for better and healthy treatment
                         </p>
+                        <Link to='/doctors'>
                         <button className="find-button">Find</button>
+                        </Link>
                     </div>
                 </div>
             </div>

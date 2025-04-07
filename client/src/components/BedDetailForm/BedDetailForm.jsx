@@ -61,7 +61,7 @@ const BedDetailForm = () => {
         })
             .then(response => {
                 alert(editingBed ? 'Bed details updated' : 'Bed details added');
-                navigate('/dashboard/beds');  
+                navigate('/dashboard/beds');
             })
             .catch(error => {
                 console.error("Error saving bed details:", error);

@@ -32,6 +32,12 @@ const HospitalSignUp = () => {
         }));
     };
 
+    const validatePassword = () => {
+        const password = formData.password;
+        return password.length >= 8 && /\d/.test(password) && /[!@#$%^&*]/.test(password);
+    };
+
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -49,6 +55,7 @@ const HospitalSignUp = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         if (step < 3) {
             setStep(step + 1);
             return;
@@ -59,20 +66,25 @@ const HospitalSignUp = () => {
             return;
         }
 
-        const address = {
-            zipCode: formData.zipCode,
-            state: formData.state,
-            city: formData.city,
-            street: formData.streetAddress,
-        };
-
         const hospitalFormData = new FormData();
-        for (let key in formData) {
-            if (!['zipCode', 'state', 'city', 'streetAddress'].includes(key)) {
+
+        // Append form data fields
+        Object.keys(formData).forEach((key) => {
+            if (key !== 'zipCode' && key !== 'state' && key !== 'city' && key !== 'streetAddress') {
                 hospitalFormData.append(key, formData[key]);
             }
-        }
-        hospitalFormData.append('address', JSON.stringify(address));
+        });
+
+        // Append address as JSON string
+        hospitalFormData.append(
+            'address',
+            JSON.stringify({
+                zipCode: formData.zipCode,
+                state: formData.state,
+                city: formData.city,
+                street: formData.streetAddress,
+            })
+        );
 
         try {
             setIsLoading(true);
@@ -93,6 +105,7 @@ const HospitalSignUp = () => {
             setIsLoading(false);
         }
     };
+
 
     const renderStepIndicator = () => (
         <div className="step-indicator">
@@ -163,6 +176,11 @@ const HospitalSignUp = () => {
                                     required
                                     placeholder="Create password"
                                 />
+                                {formData.password && !validatePassword() && (
+                                    <small className="error-message">
+                                        Password must be at least 8 characters, contain a number and a special character.
+                                    </small>
+                                )}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
@@ -176,6 +194,9 @@ const HospitalSignUp = () => {
                                     required
                                     placeholder="Confirm password"
                                 />
+                                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                                    <small className="error-message">Passwords do not match.</small>
+                                )}
                             </div>
                         </div>
                     </div>

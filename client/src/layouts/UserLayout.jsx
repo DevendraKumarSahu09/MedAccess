@@ -4,7 +4,7 @@ import Footer from '../components/Footer/Footer';
 import './layout.css';
 import Navbar from '../components/Navbar/NavBar';
 import axios from 'axios';
-import Carousel from '../components/Carousal/Carousal';
+// import Carousel from '../components/Carousal/Carousal';
 
 const UserLayout = ({ children }) => {
 
@@ -49,7 +49,7 @@ const UserLayout = ({ children }) => {
 
     return (
         <div className="layout-container">
-            
+
             <Navbar />
             <main className="layout-content">{children}</main>
             <Footer />

@@ -73,11 +73,15 @@ const BloodBankDetailPage = () => {
                             <div className="card-content">
                                 <div className="info-row">
                                     <MapPin className="info-icon" />
-                                    <p>{bloodBank.hospital.address.street}, {bloodBank.hospital.address.city}, {bloodBank.hospital.address.state} {bloodBank.hospital.address.zipCode}</p>
+                                    <p>
+                                        {bloodBank.hospital && bloodBank.hospital.address ? 
+                                            `${bloodBank.hospital.address.street || 'N/A'}, ${bloodBank.hospital.address.city || 'N/A'}, ${bloodBank.hospital.address.state || 'N/A'} ${bloodBank.hospital.address.zipCode || 'N/A'}` : 
+                                            'Address not available'}
+                                    </p>
                                 </div>
                                 <div className="info-row">
                                     <Phone className="info-icon" />
-                                    <p>{bloodBank.hospital.contact}</p>
+                                    <p>{bloodBank.hospital && bloodBank.hospital.contact ? bloodBank.hospital.contact : 'Contact not available'}</p>
                                 </div>
                             </div>
                         </div>

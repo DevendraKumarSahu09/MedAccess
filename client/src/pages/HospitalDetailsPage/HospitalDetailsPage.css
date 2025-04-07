@@ -118,6 +118,32 @@
     color: var(--primary-color);
 }
 
+/* Hospital Rating */
+.hospital-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.star {
+    color: #e2e8f0;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
 /* Info sections */
 .hospital-sections {
     display: flex;
@@ -168,6 +194,73 @@
     line-height: 1.6;
 }
 
+/* Specializations and Facilities */
+.specializations-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.specializations-list,
+.facilities-list {
+    background-color: var(--background-light);
+    border-radius: var(--border-radius);
+    padding: 24px;
+}
+
+.specializations-list h3,
+.facilities-list h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.section-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.specializations-list ul,
+.facilities-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.specializations-list li,
+.facilities-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.specializations-list li:last-child,
+.facilities-list li:last-child {
+    border-bottom: none;
+}
+
+.specializations-list li:before,
+.facilities-list li:before {
+    content: '•';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.fallback-message {
+    background-color: var(--background-light);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    line-height: 1.6;
+}
+
 /* Loading and error states */
 .loading-state,
 .error-state {
@@ -194,6 +287,10 @@
     }
 
     .quick-info {
+        grid-template-columns: 1fr;
+    }
+
+    .specializations-container {
         grid-template-columns: 1fr;
     }
 }
