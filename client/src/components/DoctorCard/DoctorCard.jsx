@@ -23,13 +23,13 @@ const DoctorCard = ({ doctor }) => {
 
         <div className="info-grid">
           <div className="info-item">
-            <Stethoscope size={16} className="info-icon" />
+            <Stethoscope  className="info-icon" />
             <span>{doctor.specialization}</span>
           </div>
 
           <div className="info-item">
-            <Hospital size={16} className="info-icon" />
-            <span>{doctor.experience}</span>
+            <Hospital  className="info-icon" />
+            <span>{doctor.experience} years experience</span>
           </div>
 
           {/* <div className="info-item">

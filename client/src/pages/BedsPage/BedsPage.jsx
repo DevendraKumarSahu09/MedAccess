@@ -82,7 +82,7 @@ const BedsPage = () => {
                         className="hospital-card"
                         onClick={() => handleHospitalClick(hospital._id)} // On card click, show bed details
                     >
-                        <div className="card-badge">{hospital.beds.length} Types</div>
+                        {/* <div className="card-badge">{hospital.hospitalName}</div> */}
                         <img
                             src={hospital.hospitalProfilePhoto}
                             alt={`${hospital.hospitalName} Profile`}

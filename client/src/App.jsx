@@ -44,6 +44,10 @@ import Beds from './DashPages/Beds/Beds';
 import PharmacyPage from './pages/PharmacyPage/PharmacyPage';
 import HospitalDoctorsPage from './pages/HospitalDoctorsPage/HospitalDoctorsPage';
 
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions/TermsConditions';
+import CookiePolicy from './pages/CookiePolicy/CookiePolicy';
+
 const App = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -106,6 +110,11 @@ const App = () => {
           <Route path="/dashboard/doctors/adddoctorform" element={<PrivateRoute><DashLayout><AddDoctorForm /></DashLayout></PrivateRoute>} />
           <Route path="/dashboard/doctors/bedetailsform" element={<PrivateRoute><DashLayout><BedDetailForm /></DashLayout></PrivateRoute>} />
           <Route path="/dashboard/beds/:bedType" element={<BedsDetailPage />} />
+
+          {/* New policy routes */}
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
         </Routes>
       </main>
       <Footer />

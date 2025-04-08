@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -36,19 +37,17 @@ const Footer = () => {
 
                 <div className="footer-nav">
                     <nav>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/" className="nav-link">Services</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                        <a href="/" className="nav-link">Privacy</a>
+                        <Link to="/about" className="nav-link">About</Link>
+                        <Link to="/services" className="nav-link">Services</Link>
+                        <Link to="/contact" className="nav-link">Contact</Link>
                     </nav>
                 </div>
 
                 <div className="footer-right">
-                    <button className="contact-btn">
-                    <a href="/contact"><span>Contact Us</span></a>
-
+                    <Link to="/contact" className="contact-btn">
+                        <span>Contact Us</span>
                         <i className="fas fa-arrow-right"></i>
-                    </button>
+                    </Link>
                 </div>
             </div>
 
@@ -57,11 +56,11 @@ const Footer = () => {
                     <p className='allrights'>© {currentYear} MedAccess. All Rights Reserved.</p>
                 </div>
                 <div className="footer-info">
-                    <a href="/terms">Terms & Conditions</a>
+                    <Link to="/terms" className="footer-link">Terms & Conditions</Link>
                     <span className="separator">|</span>
-                    <a href="/privacy">Privacy Policy</a>
+                    <Link to="/privacy" className="footer-link">Privacy Policy</Link>
                     <span className="separator">|</span>
-                    <a href="/cookies">Cookie Policy</a>
+                    <Link to="/cookies" className="footer-link">Cookie Policy</Link>
                 </div>
             </div>
         </footer>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "./Homepage.css";
 import BlogsNews from "./BlogsNews";
+import ChatbotWidget from "../../components/ChatbotWidget/ChatbotWidget";
 
 const HomePage = () => {
     const carouselImages = [
@@ -165,20 +166,21 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <div className="find-doctors">
-                <div className="overlay">
-                    <div className="content">
+            {/* <div className="find-doctors-section">
+                <div className="find-doctors-overlay">
+                    <div className="find-doctors-content">
                         <h1>FIND DOCTORS</h1>
-                        <p className="subtitle 2">
-                            Find out Doctors from various specializations and departments on a go. Checkout theri ratings and work, refer for better and healthy treatment
+                        <p className="find-doctors-subtitle">
+                            Find out Doctors from various specializations and departments on a go. Checkout their ratings and work, refer for better and healthy treatment
                         </p>
                         <Link to='/doctors'>
-                        <button className="find-button">Find</button>
+                            <button className="find-doctors-button">Find</button>
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <BlogsNews />
+            <ChatbotWidget />
         </>
     );
 };

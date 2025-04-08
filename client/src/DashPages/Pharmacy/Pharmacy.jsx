@@ -253,7 +253,7 @@ const Pharmacy = () => {
         console.error("Error response:", err.response.data);
         setError(err.response.data.message || 'Failed to save medication. Please try again.');
       } else {
-        setError('Failed to save medication. Please try again.');
+      setError('Failed to save medication. Please try again.');
       }
     }
   };
@@ -288,7 +288,7 @@ const Pharmacy = () => {
         console.error("Error response:", err.response.data);
         setError(err.response.data.message || 'Failed to delete medication. Please try again.');
       } else {
-        setError('Failed to delete medication. Please try again.');
+      setError('Failed to delete medication. Please try again.');
       }
     }
   };
@@ -361,7 +361,7 @@ const Pharmacy = () => {
           )}
         </div>
       </div>
-      
+
       {error && (
         <div className="error-message">
           <div className="error-content">

@@ -36,7 +36,7 @@ const DoctorsPage = () => {
     <div className="doctors-container">
       <div className="doctors-banner">
         <div className="banner-content">
-          <UserRound size={40} className="banner-icon" />
+          {/* <UserRound size={40} className="banner-icon" /> */}
           <h1>Find Your Doctor</h1>
           <p className="banner-subtitle">Connect with the best healthcare professionals</p>
 
